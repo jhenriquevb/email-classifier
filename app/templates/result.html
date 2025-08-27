@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Resultado — Email Classifier</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link href="/static/global.css" rel="stylesheet">
+  <link href="/static/result.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body>
+  <div class="main-container">
+    <div class="header-section">
+      <h1>Resultado da Análise</h1>
+      <p>Classificação e resposta sugerida para seu email</p>
+    </div>
+
+    <div class="content-section">
+      <div class="result-container">
+
+        <div class="result-card">
+          <div class="card-header">
+            Classificação
+          </div>
+          <div class="card-body">
+            <div class="info-grid">
+              <div class="info-item">
+                <span class="info-label">Categoria:</span>
+                <div class="info-value">
+                  <span class="category-badge {{ result.categoria.lower() }}">{{ result.categoria }}</span>
+                </div>
+              </div>
+
+              {% if result.justificativa %}
+              <div class="info-item">
+                <span class="info-label">Justificativa:</span>
+                <span class="info-value">{{ result.justificativa }}</span>
+              </div>
+              {% endif %}
+
+              {% if result.topicos and result.topicos|length > 0 %}
+              <div class="info-item">
+                <span class="info-label">Tópicos:</span>
+                <div class="info-value">
+                  <div class="topics-list">
+                    {% for topico in result.topicos %}
+                    <span class="topic-tag">{{ topico }}</span>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="result-card">
+          <div class="card-header">
+            Resposta Sugerida
+          </div>
+          <div class="card-body">
+            <div class="response-container">
+              <div class="response-text" id="resp">{{ result.resposta_sugerida }}</div>
+              <button class="copy-button" onclick="copyToClipboard('resp', this)">
+                <i class="bi bi-clipboard me-1"></i>
+                Copiar Resposta
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-card">
+          <div class="card-header">
+            Texto Analisado
+          </div>
+          <div class="card-body">
+            <div class="analyzed-text">{{ cleaned }}</div>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <a href="/" class="btn-back">
+            <i class="bi bi-arrow-left me-1"></i>
+            Voltar
+          </a>
+          <a href="/" class="btn-new-analysis">
+            <i class="bi bi-plus-circle me-1"></i>
+            Nova Análise
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function copyToClipboard(elementId, button) {
+      const element = document.getElementById(elementId);
+      const text = element.innerText;
+
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = button.innerHTML;
+        button.innerHTML = '<i class="bi bi-check me-1"></i>Copiado!';
+        button.classList.add('copy-success');
+
+        setTimeout(() => {
+          button.innerHTML = originalText;
+          button.classList.remove('copy-success');
+        }, 2000);
+      }).catch(err => {
+        console.error('Erro ao copiar:', err);
+      });
+    }
+  </script>
+</body>
+
+</html>

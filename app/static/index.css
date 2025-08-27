@@ -1,0 +1,139 @@
+.two-column-layout {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 2rem;
+  margin-top: 1.5rem;
+  align-items: start;
+}
+
+.upload-column {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.text-column {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text-secondary);
+  min-height: 300px;
+}
+
+.divider span {
+  padding: 0.5rem 1rem;
+  background: var(--card-bg);
+  font-weight: 500;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.file-info-card {
+  background: var(--success-color);
+  color: white;
+  border-radius: 4px;
+  padding: 1rem;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.file-info-card .btn-close {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.file-info-card .btn-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.upload-area {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#text-area-container {
+  height: 300px;
+}
+
+#text-area-container textarea {
+  height: 100%;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.section-title {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--primary-color);
+  display: inline-block;
+}
+
+.process-button {
+  margin-top: 2rem;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+}
+
+/* Estados desativados */
+.upload-column.disabled,
+.text-column.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.upload-column.disabled .section-title,
+.text-column.disabled .section-title {
+  color: var(--text-secondary);
+}
+
+.upload-column.disabled .upload-area,
+.text-column.disabled textarea {
+  background-color: #f8f9fa;
+  border-color: #e9ecef;
+  cursor: not-allowed;
+}
+
+@media (max-width: 992px) {
+  .two-column-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .divider {
+    min-height: auto;
+    margin: 1.5rem 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .two-column-layout {
+    gap: 1rem;
+  }
+  
+  .divider {
+    margin: 1rem 0;
+  }
+}

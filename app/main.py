@@ -78,4 +78,4 @@ async def process(
 
 @app.get("/health")
 def health_check():
-    return {"status": "ok", "env": settings.ENV}
+    return {"status": "ok"}

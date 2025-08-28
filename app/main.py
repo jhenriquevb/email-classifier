@@ -54,9 +54,9 @@ async def process(
             },
         )
 
-    cleaned = nlp.clean_text(text)
+    processed_text = nlp.preprocess_email_text(text)
 
-    ai_result = classify_and_suggest(cleaned)
+    ai_result = classify_and_suggest(processed_text)
 
     result = {
         "categoria": ai_result.get("categoria", "Produtivo"),
@@ -70,7 +70,7 @@ async def process(
         {
             "request": request,
             "raw_text": text,
-            "cleaned": cleaned,
+            "processed_text": processed_text,
             "result": result,
         },
     )

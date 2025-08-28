@@ -9,8 +9,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet">
-  <link href="/static/global.css" rel="stylesheet">
-  <link href="/static/result.css" rel="stylesheet">
+  <link href="/static/css/global.css" rel="stylesheet">
+  <link href="/static/css/result.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 
@@ -60,7 +60,7 @@
           </div>
         </div>
 
-        <div class="result-card">
+        <div class="result-card priority-card">
           <div class="card-header">
             Resposta Sugerida
           </div>
@@ -75,21 +75,39 @@
           </div>
         </div>
 
-        <div class="result-card">
-          <div class="card-header">
-            Texto Analisado
+        <!-- Seção do Texto Original - Colapsável e inicialmente fechada -->
+        <div class="result-card secondary-card">
+          <div class="card-header collapsible" onclick="toggleSection('original-text')">
+            <div class="header-content">
+              <span>Texto Original</span>
+              <small class="header-subtitle">Clique para ver o texto do email como foi enviado</small>
+            </div>
+            <i class="bi bi-chevron-right toggle-icon" id="original-text-icon"></i>
           </div>
-          <div class="card-body">
+          <div class="card-body collapsible-content collapsed" id="original-text">
             <div class="analyzed-text">{{ raw_text }}</div>
           </div>
         </div>
         
-        <div class="result-card">
-          <div class="card-header">
-            Texto Processado
+        <!-- Seção do Texto Processado - Colapsável e inicialmente fechada -->
+        <div class="result-card secondary-card">
+          <div class="card-header collapsible" onclick="toggleSection('processed-text')">
+            <div class="header-content">
+              <span>Detalhes Técnicos</span>
+              <small class="header-subtitle">Como o texto foi processado para análise</small>
+            </div>
+            <i class="bi bi-chevron-right toggle-icon" id="processed-text-icon"></i>
           </div>
-          <div class="card-body">
-            <div class="analyzed-text">{{ processed_text }}</div>
+          <div class="card-body collapsible-content collapsed" id="processed-text">
+            <div class="tech-explanation">
+              <p><strong>Este é o texto após pré-processamento:</strong></p>
+              <ul>
+                <li>Emails, URLs e números foram substituídos por placeholders (&lt;EMAIL&gt;, &lt;URL&gt;, &lt;NUM&gt;)</li>
+                <li>Palavras foram convertidas para sua forma base (lematização)</li>
+                <li>Palavras muito comuns foram removidas para focar no conteúdo principal</li>
+              </ul>
+            </div>
+            <div class="analyzed-text technical">{{ processed_text }}</div>
           </div>
         </div>
 
@@ -103,25 +121,7 @@
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    function copyToClipboard(elementId, button) {
-      const element = document.getElementById(elementId);
-      const text = element.innerText;
-
-      navigator.clipboard.writeText(text).then(() => {
-        const originalText = button.innerHTML;
-        button.innerHTML = '<i class="bi bi-check me-1"></i>Copiado!';
-        button.classList.add('copy-success');
-
-        setTimeout(() => {
-          button.innerHTML = originalText;
-          button.classList.remove('copy-success');
-        }, 2000);
-      }).catch(err => {
-        console.error('Erro ao copiar:', err);
-      });
-    }
-  </script>
+  <script src="/static/js/result.js"></script>
 </body>
 
 </html>

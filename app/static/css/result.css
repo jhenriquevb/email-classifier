@@ -27,6 +27,24 @@
   margin-bottom: 1.5rem;
 }
 
+.result-card.priority-card {
+  border: 2px solid var(--primary-color);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.1);
+}
+
+.result-card.secondary-card {
+  background: #fafafa;
+  border: 1px solid #e0e0e0;
+}
+
+.result-card.secondary-card .card-header {
+  background: var(--secondary-color);
+}
+
+.result-card.secondary-card .card-header:hover {
+  background: #5a6268;
+}
+
 .result-card .card-header {
   background: var(--primary-color);
   color: white;
@@ -34,6 +52,35 @@
   padding: 1rem;
   font-weight: 500;
   font-size: 1.1rem;
+}
+
+.result-card .card-header.collapsible {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s ease;
+}
+
+.result-card .card-header.collapsible:hover {
+  background: var(--primary-dark);
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.header-subtitle {
+  font-size: 0.85rem;
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+.toggle-icon {
+  transition: transform 0.3s ease;
+  font-size: 1.2rem;
 }
 
 .result-card .card-body {
@@ -104,6 +151,51 @@
   overflow-y: auto;
   white-space: pre-wrap;
   word-wrap: break-word;
+}
+
+.analyzed-text.technical {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  background: #f8f9fa;
+  border-left: 3px solid var(--secondary-color);
+}
+
+.collapsible-content {
+  max-height: 1000px;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 1;
+}
+
+.collapsible-content.collapsed {
+  max-height: 0;
+  opacity: 0;
+  padding: 0 1.5rem;
+}
+
+.tech-explanation {
+  background: #e3f2fd;
+  border: 1px solid #bbdefb;
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.tech-explanation p {
+  margin-bottom: 0.5rem;
+  color: #1565c0;
+  font-weight: 500;
+}
+
+.tech-explanation ul {
+  margin-bottom: 0;
+  padding-left: 1.5rem;
+}
+
+.tech-explanation li {
+  color: #424242;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
 }
 
 .action-buttons {

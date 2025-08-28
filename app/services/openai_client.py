@@ -69,7 +69,6 @@ def _call_chat_json_mode(messages: list[dict[str, Any]], model: str) -> str:
             resp = _client.chat.completions.create(
                 model=model,
                 messages=messages,
-                temperature=0.2,
                 response_format={"type": "json_object"},
             )
             return resp.choices[0].message.content or "{}"
@@ -86,12 +85,12 @@ def _call_chat_json_mode(messages: list[dict[str, Any]], model: str) -> str:
 def classify_and_suggest(email_text: str) -> Dict[str, Any]:
     """
     Usa Chat Completions em JSON Mode com validação.
-    Tenta primeiro o modelo do .env; se der erro de modelo, tenta 'gpt-4o-mini'.
+    Tenta primeiro o modelo do .env; se der erro de modelo, tenta 'gpt-4.1-mini'.
     """
     base_messages = [{"role": "system", "content": SYSTEM_PROMPT}, *FEW_SHOTS,
                      {"role": "user", "content": _build_user_prompt(email_text)}]
 
-    model_to_try = [settings.OPENAI_MODEL, "gpt-4o-mini"]
+    model_to_try = [settings.OPENAI_MODEL, "gpt-4.1-mini"]
     last_raw = "{}"
 
     for mdl in model_to_try:
